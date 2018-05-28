@@ -1,4 +1,4 @@
-﻿using MovieProjectDB;
+﻿using MovieProjectDB.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MovieProjectDB.DataAccess.Repositories
 {
-    public abstract class BaseRepository<T> : IBaseRepository<T>
+    public class BaseRepository<T> : IBaseRepository<T>
         where T : class
     {
         protected MovieProjectDBContext Context;

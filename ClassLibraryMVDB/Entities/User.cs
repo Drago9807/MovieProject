@@ -26,7 +26,7 @@ namespace MovieProjectDB.Entities
         [Required(ErrorMessage = "UserName is needed!")]
         public string UserName { get; set; }
 
-        [StringLength(20, MinimumLength = 1, ErrorMessage = "Field {1} must be between 1 and 20 characters!")]        
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "Field {1} must be between 1 and 50 characters!")]        
         [Required(ErrorMessage = "Password is needed!")]
         public string Password { get; set; }
 
@@ -38,6 +38,7 @@ namespace MovieProjectDB.Entities
         [Required(ErrorMessage = "Phone number is needed!")]
         public string PhoneNumber { get; set; }
         
+        [StringLength(50, ErrorMessage = "Field is not needed to proceed.")]
         public string Address { get; set; }
     }
 }
