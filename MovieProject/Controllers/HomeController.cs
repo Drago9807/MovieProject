@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static MovieProject.Controllers.LoginController;
 
 namespace MovieProject.Controllers
 {
@@ -30,12 +31,45 @@ namespace MovieProject.Controllers
 
             return View();
         }
+        //ottuk pochva registration formata
+        [HttpGet]
+        public ActionResult Registration()
+        {
+            return View();
+        }     
+        [HttpPost]
+        public ActionResult Registration(RegistrationFormModel viewModel)
+        {
+            // server validation for Firstname to be with capital letter
+            if (string.IsNullOrEmpty(viewModel.FirstName) == false)
+            {
+                char firstLetter = viewModel.FirstName[0];
+                if (char.IsUpper(firstLetter) == false)
+                {
+                    ModelState.AddModelError("FirstName", "First name should start with a capital letter!");
+                }
+            }
+
+            // Do not save to database when the ModelState is not valid !
+            if (ModelState.IsValid)
+            {
+                // save the information to the database
+                // ...
+                TempData["Message"] = "Registration successful!";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        //ottuk pochva login formata
         [HttpGet]
         public ActionResult Login()
         {
             return View();
-        }
-
+        }       
         [HttpPost]
         [ActionName("Login")]
         public ActionResult Login(LoginFormModel viewModel)
@@ -53,40 +87,16 @@ namespace MovieProject.Controllers
                 }
                 
             }
-            
-            
-                return RedirectToAction("Index");
-            
+            return RedirectToAction("Index");           
         }
-         //<<<<<<<<<<<<
-        public class Newcomer
-        {
-            public int ID { get; set; }
-            public string Username { get; set; }
-            public bool IsAdministrator { get; set; }
-        }
-        public class NewcomerRepository
-        {
-            public Newcomer GetUserByNameAndPassword(string username, string password)
-            {
-                return new Newcomer()
-                {
-                    ID = 2,
-                    Username = username,
-                    IsAdministrator = true
-                };
-            }
-        }
-        [HttpPost]
-        [ActionName("Login")]
+        //UserRepository
+        
         public ActionResult LoginPost(LoginFormModel viewModel)
         {
             if (ModelState.IsValid)
-            {
-                #region mockup classes
-                // here we have to check if the username exists in the database
-                NewcomerRepository newcomerRepository = new NewcomerRepository();
-                Newcomer dbUser = newcomerRepository.GetUserByNameAndPassword(viewModel.Username, viewModel.Password);
+            {                               
+                UserRepository userRepository = new UserRepository();
+                LoginController.NUser dbUser = userRepository.GetUserByNameAndPassword(viewModel.Username, viewModel.Password);
 
                 bool isUserExists = dbUser != null;
                 if (isUserExists)
@@ -97,10 +107,8 @@ namespace MovieProject.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Invalid username and/or password");
-                }
-                #endregion
+                }                
             }
-            // if we are here, this means there is some validation error and we have to show the login screen again
             return View();
         }
 
@@ -109,7 +117,5 @@ namespace MovieProject.Controllers
             UserLoginProcess.Current.Logout();
             return RedirectToAction("Index");
         }
-
-
     }
 }

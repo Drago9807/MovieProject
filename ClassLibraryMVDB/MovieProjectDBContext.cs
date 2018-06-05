@@ -8,8 +8,7 @@ namespace MovieProjectDB
 
     public partial class MovieProjectDBContext : DbContext
     {
-        public MovieProjectDBContext()
-            : base("name=MovieProjectDBContext")
+        public MovieProjectDBContext() : base("name=MovieProjectDBContext")
         {
         }
 

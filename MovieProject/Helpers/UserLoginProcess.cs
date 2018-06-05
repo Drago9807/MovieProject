@@ -14,7 +14,8 @@ namespace MovieProject.Helpers
 
         private UserLoginProcess()
         {
-            //IsAuthenticated = false;  
+            //avtomatichen login kato administrator
+            IsAuthenticated = false;  
         }
 
         public static UserLoginProcess Current

@@ -17,8 +17,6 @@
         private BaseRepository<Genre> genreRepository;
         private BaseRepository<Movie> movieRepository;
         private BaseRepository<MovieGenre> movieGenreRepository;
-        private BaseRepository<ProjectionPlace> projectionPlaceRepository;
-        private BaseRepository<MovieTicketPrices> movieTicketPricesRepository;
 
         public UnitOfWork(MovieProjectDBContext ctx)
         {
@@ -77,31 +75,6 @@
             }
         }
 
-        public BaseRepository<ProjectionPlace> ProjectionPlaceRepository
-        {
-            get
-            {
-                if (projectionPlaceRepository == null)
-                {
-                    projectionPlaceRepository = new BaseRepository<ProjectionPlace>();
-                }
-
-                return projectionPlaceRepository;
-            }
-        }
-
-        public BaseRepository<MovieTicketPrices> MovieTicketPricesRepository
-        {
-            get
-            {
-                if (movieTicketPricesRepository == null)
-                {
-                    movieTicketPricesRepository = new BaseRepository<MovieTicketPrices>();
-                }
-
-                return movieTicketPricesRepository;
-            }
-        }
         public DbTransaction Transaction { get; private set; }
 
         public virtual int SaveChanges() => context.SaveChanges();

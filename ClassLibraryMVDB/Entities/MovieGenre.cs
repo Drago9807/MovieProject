@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace MovieProjectDB.Entities
 {
     public class MovieGenre
-    {        
+    {
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Computed)]
         [Required]
         public int MovieId { get; set; }
 
