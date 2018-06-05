@@ -6,24 +6,22 @@ using System.Web.Mvc;
 
 namespace MovieProject.Controllers
 {
-    public class LoginController : Controller
+    public class RegistrationController : Controller
     {
 
         public class NUser
         {
-            public int ID { get; set; }
+            public int UserId { get; set; }
             public string Username { get; set; }
-            public bool IsAdministrator { get; set; }
+            public bool Password { get; set; }
         }
+
         public class UserRepository
         {
-            public NUser GetUserByNameAndPassword(string username, string password)
+            public NUser GetUserByNameAndPassword(string Username, string Password)
             {
                 return new NUser()
                 {
-                    ID = 2,
-                    Username = username,
-                    IsAdministrator = true
                 };
             }
         }

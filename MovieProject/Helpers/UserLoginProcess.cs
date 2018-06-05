@@ -7,14 +7,14 @@ namespace MovieProject.Helpers
 {
     public class UserLoginProcess
     {
-        public int UserID { get; private set; }
-        public string Username { get; private set; }
+        public int UserId { get; private set; }
+        public string Username { get;  set; }
+        public string Password { get;  set; }
         public bool IsAuthenticated { get; private set; }
         public bool IsAdministrator { get; private set; }
 
         private UserLoginProcess()
-        {
-            //avtomatichen login kato administrator
+        {            
             IsAuthenticated = false;  
         }
 
@@ -32,11 +32,11 @@ namespace MovieProject.Helpers
             }
         }
 
-        public void SetCurrentUser(int userID, string username, bool isAdministrator)
+        public void SetCurrentUser(int userId, string username, bool isAdministrator)
         {
             this.IsAuthenticated = true;
             this.IsAdministrator = isAdministrator;
-            this.UserID = userID;
+            this.UserId = userId;
             this.Username = username;
         }
 
@@ -44,7 +44,7 @@ namespace MovieProject.Helpers
         {
             this.IsAuthenticated = false;
             this.IsAdministrator = false;
-            this.UserID = 0;
+            this.UserId = 0;
             this.Username = string.Empty;
         }
 

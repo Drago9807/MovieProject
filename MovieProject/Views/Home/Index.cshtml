@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 <h1>Index</h1>
-@if (UserLoginProcess.Current.IsAuthenticated)
+@*@if (UserLoginProcess.Current.IsAuthenticated)
 {
     <div>Hello @UserLoginProcess.Current.Username </div>
     <div>You are administrator: @UserLoginProcess.Current.IsAdministrator </div>
@@ -12,8 +12,8 @@
 else
 {
     @Html.ActionLink("Login", "Login", "Home")
-}
+}*@
 
-@ViewBag.Message @* Actually there is no need to check if it is null or "" *@
+@ViewBag.Message @**@
 
-@Html.ActionLink("Registration", "Registration", "Home")
+@*@Html.ActionLink("Registration", "Registration", "Home")*@

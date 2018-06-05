@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using static MovieProject.Controllers.LoginController;
+using static MovieProject.Controllers.RegistrationController;
 
 namespace MovieProject.Controllers
 {
@@ -36,25 +36,23 @@ namespace MovieProject.Controllers
         public ActionResult Registration()
         {
             return View();
-        }     
+        }      
+
         [HttpPost]
         public ActionResult Registration(RegistrationFormModel viewModel)
-        {
-            // server validation for Firstname to be with capital letter
-            if (string.IsNullOrEmpty(viewModel.FirstName) == false)
-            {
-                char firstLetter = viewModel.FirstName[0];
-                if (char.IsUpper(firstLetter) == false)
-                {
-                    ModelState.AddModelError("FirstName", "First name should start with a capital letter!");
-                }
-            }
-
-            // Do not save to database when the ModelState is not valid !
+        {           
             if (ModelState.IsValid)
             {
-                // save the information to the database
-                // ...
+                MovieProjectDB.Entities.User user = new MovieProjectDB.Entities.User()
+                {
+                    UserId = viewModel.UserId,
+                    UserName = viewModel.Username,
+                    FirstName = viewModel.FirstName,
+                    LastName = viewModel.LastName,
+                    Password = viewModel.Password,
+                    Email = viewModel.Email,
+                    PhoneNumber = viewModel.PhoneNumber
+                };
                 TempData["Message"] = "Registration successful!";
                 return RedirectToAction("Index");
             }
@@ -89,19 +87,18 @@ namespace MovieProject.Controllers
             }
             return RedirectToAction("Index");           
         }
-        //UserRepository
         
         public ActionResult LoginPost(LoginFormModel viewModel)
         {
             if (ModelState.IsValid)
             {                               
                 UserRepository userRepository = new UserRepository();
-                LoginController.NUser dbUser = userRepository.GetUserByNameAndPassword(viewModel.Username, viewModel.Password);
+                RegistrationController.NUser dbUser = userRepository.GetUserByNameAndPassword(viewModel.Username, viewModel.Password);
 
                 bool isUserExists = dbUser != null;
                 if (isUserExists)
                 {
-                    UserLoginProcess.Current.SetCurrentUser(dbUser.ID, dbUser.Username, dbUser.IsAdministrator);
+                    UserLoginProcess.Current.SetCurrentUser(dbUser.UserId, dbUser.Username, dbUser.Password);
                     return RedirectToAction("Index");
                 }
                 else
