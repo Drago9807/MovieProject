@@ -10,5 +10,7 @@ namespace MovieProjectDB.Entities
     {
         public int GenreId { get; set; }
         public string GenreType { get; set; }
+
+        public virtual ICollection<MovieGenre> MovieGenres { get; set; }
     }
 }

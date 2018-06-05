@@ -13,7 +13,8 @@ namespace MovieProject.Helpers
         public bool IsAdministrator { get; private set; }
 
         private UserLoginProcess()
-        {   // IsAuthenticated = false;  
+        {
+            //IsAuthenticated = false;  
         }
 
         public static UserLoginProcess Current

@@ -1,5 +1,7 @@
 ﻿using MovieProject.Helpers;
 using MovieProject.Models;
+using MovieProjectDB;
+using MovieProjectDB.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,16 +38,25 @@ namespace MovieProject.Controllers
 
         [HttpPost]
         [ActionName("Login")]
-        public ActionResult LoginPost(LoginFormModel viewModel)
+        public ActionResult Login(LoginFormModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                   //User user = uow.UserRepository.Login(username, password)
+                    return View();
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Details are invalid!");
+                }
+                
             }
-            else
-            {
+            
+            
                 return RedirectToAction("Index");
-            }
+            
         }
          //<<<<<<<<<<<<
         public class Newcomer
@@ -68,7 +79,7 @@ namespace MovieProject.Controllers
         }
         [HttpPost]
         [ActionName("Login")]
-        public ActionResult LoginPostntnt(LoginFormModel viewModel)
+        public ActionResult LoginPost(LoginFormModel viewModel)
         {
             if (ModelState.IsValid)
             {

@@ -39,6 +39,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,10 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C__MigrationHistory.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\MovieGenre.cs" />
-    <Compile Include="Entities\MovieTicketPrices.cs" />
-    <Compile Include="Entities\ProjectionPlace.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Movie.cs" />
     <Compile Include="Migrations\201804261441118_InitialCreate.cs" />
@@ -58,9 +59,9 @@
       <DependentUpon>201804261441118_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MovieProjectDBContext.cs" />
     <Compile Include="MyConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MovieProjectDBContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
