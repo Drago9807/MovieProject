@@ -10,7 +10,7 @@
     using MovieProjectDB.DataAccess.Repositories;
 
     public class UnitOfWork
-    {
+    {        
         private MovieProjectDBContext context;
 
         private BaseRepository<User> userRepository;

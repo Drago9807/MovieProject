@@ -17,7 +17,6 @@ namespace MovieProjectDB.Entities
         [StringLength(150)]
         public string MovieName { get; set; }
 
-        [MaxLength(150)]
         public double MoviePrice { get; set; }
 
         public virtual ICollection<MovieGenre> MovieGenres { get; set; }

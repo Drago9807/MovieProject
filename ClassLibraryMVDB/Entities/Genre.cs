@@ -12,10 +12,9 @@ namespace MovieProjectDB.Entities
     {
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Computed)]
         [Key]
-        [StringLength(150)]
         public int GenreId { get; set; }
 
-        [StringLength(150)]
+        [StringLength(50)]
         public string GenreType { get; set; }
 
         public virtual ICollection<MovieGenre> MovieGenres { get; set; }

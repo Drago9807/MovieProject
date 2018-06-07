@@ -4,7 +4,9 @@ using MovieProjectDB;
 using MovieProjectDB.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using static MovieProject.Controllers.RegistrationController;
@@ -76,6 +78,7 @@ namespace MovieProject.Controllers
             {
                 try
                 {
+                    //User user = UnitOfWork.UserRepository.Login(string Username, password)
                    //User user = uow.UserRepository.Login(username, password)
                     return View();
                 }
@@ -92,13 +95,13 @@ namespace MovieProject.Controllers
         {
             if (ModelState.IsValid)
             {                               
-                UserRepository userRepository = new UserRepository();
+                NUserRepository userRepository = new NUserRepository();
                 RegistrationController.NUser dbUser = userRepository.GetUserByNameAndPassword(viewModel.Username, viewModel.Password);
 
                 bool isUserExists = dbUser != null;
                 if (isUserExists)
                 {
-                    UserLoginProcess.Current.SetCurrentUser(dbUser.UserId, dbUser.Username, dbUser.Password);
+                    UserLoginProcess.Current.SetCurrentUser(dbUser.UserId, dbUser.Username, dbUser.IsAdministrator, dbUser.Password);
                     return RedirectToAction("Index");
                 }
                 else
@@ -114,5 +117,7 @@ namespace MovieProject.Controllers
             UserLoginProcess.Current.Logout();
             return RedirectToAction("Index");
         }
+        //CRUD
+        
     }
 }

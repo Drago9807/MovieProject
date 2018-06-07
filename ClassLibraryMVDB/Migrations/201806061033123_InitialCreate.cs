@@ -19,6 +19,38 @@ namespace MovieProjectDB.Migrations
                 .PrimaryKey(t => new { t.MigrationId, t.ContextKey });
             
             CreateTable(
+                "dbo.Genres",
+                c => new
+                    {
+                        GenreId = c.Int(nullable: false),
+                        GenreType = c.String(maxLength: 50),
+                    })
+                .PrimaryKey(t => t.GenreId);
+            
+            CreateTable(
+                "dbo.MovieGenres",
+                c => new
+                    {
+                        MovieId = c.Int(nullable: false),
+                        Genre_GenreId = c.Int(),
+                    })
+                .PrimaryKey(t => t.MovieId)
+                .ForeignKey("dbo.Movies", t => t.MovieId)
+                .ForeignKey("dbo.Genres", t => t.Genre_GenreId)
+                .Index(t => t.MovieId)
+                .Index(t => t.Genre_GenreId);
+            
+            CreateTable(
+                "dbo.Movies",
+                c => new
+                    {
+                        MovieId = c.Int(nullable: false),
+                        MovieName = c.String(maxLength: 150),
+                        MoviePrice = c.Double(nullable: false),
+                    })
+                .PrimaryKey(t => t.MovieId);
+            
+            CreateTable(
                 "dbo.Users",
                 c => new
                     {
@@ -32,34 +64,20 @@ namespace MovieProjectDB.Migrations
                         Address = c.String(maxLength: 50),
                     })
                 .PrimaryKey(t => t.UserId);
-
-            CreateTable(
-                "dbo.Movies",
-                c => new
-                    {
-                        MovieId = c.Int(nullable: false, identity: true),
-                        MovieName = c.String(nullable: false),
-                        MoviePrice = c.Double(nullable: false)
-                    })
-                .PrimaryKey(t => t.MovieId);
-
-            CreateTable(
-               "dbo.Genres",
-               c => new
-                   {
-                       GenreId = c.Int(nullable: false, identity: true),
-                       GenreType = c.String(nullable: false),
-                       MoviePrice = c.Double(nullable: false)
-                   })
-               .PrimaryKey(t => t.GenreId);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.MovieGenres", "Genre_GenreId", "dbo.Genres");
+            DropForeignKey("dbo.MovieGenres", "MovieId", "dbo.Movies");
+            DropIndex("dbo.MovieGenres", new[] { "Genre_GenreId" });
+            DropIndex("dbo.MovieGenres", new[] { "MovieId" });
             DropTable("dbo.Users");
-            DropTable("dbo.__MigrationHistory");
             DropTable("dbo.Movies");
-            DropTable("Genres");
+            DropTable("dbo.MovieGenres");
+            DropTable("dbo.Genres");
+            DropTable("dbo.__MigrationHistory");
         }
     }
 }

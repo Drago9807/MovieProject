@@ -21,8 +21,7 @@ namespace MovieProjectDB.DataAccess.Repositories
             }
         }
 
-        public BaseRepository() =>
-            // this constructor is automatically invoked when the default child constructor is called
+        public BaseRepository() =>            
             Context = new MovieProjectDBContext();
 
         public List<T> GetAll() => Context.Set<T>().ToList();
@@ -44,11 +43,11 @@ namespace MovieProjectDB.DataAccess.Repositories
 
             Context.Entry(item).State = EntityState.Modified;
 
-            //    Context.Entry(category).State = EntityState.Modified;
+            //Context.Entry(category).State = EntityState.Modified;
             //var entry = Context.Entry(category);
             //Context.Categories.Attach(category);
             //entry.State = EntityState.Modified;
-            Context.SaveChanges();
+            //Context.SaveChanges();
         }
         public bool DeleteByID(int id)
         {

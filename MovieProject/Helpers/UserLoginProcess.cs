@@ -15,7 +15,7 @@ namespace MovieProject.Helpers
 
         private UserLoginProcess()
         {            
-            IsAuthenticated = false;  
+            IsAuthenticated = true;  
         }
 
         public static UserLoginProcess Current
@@ -32,7 +32,7 @@ namespace MovieProject.Helpers
             }
         }
 
-        public void SetCurrentUser(int userId, string username, bool isAdministrator)
+        public void SetCurrentUser(int userId, string username, bool isAdministrator, bool password)
         {
             this.IsAuthenticated = true;
             this.IsAdministrator = isAdministrator;

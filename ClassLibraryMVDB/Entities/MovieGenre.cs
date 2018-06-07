@@ -12,6 +12,7 @@ namespace MovieProjectDB.Entities
     {
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Computed)]
         [Required]
+        [Key]
         public int MovieId { get; set; }
 
         [Required, ForeignKey("MovieId")]
