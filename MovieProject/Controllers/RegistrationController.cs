@@ -8,30 +8,13 @@ namespace MovieProject.Controllers
 {
     public class RegistrationController : Controller
     {
-
-        public class NUser
+        public ActionResult Index()
         {
-            internal bool IsAdministrator { get; set; }
-
-            public int UserId { get; set; }
-            public string Username { get; set; }
-            public bool Password { get; set; }
+            return View();
         }
-
-        public class NUserRepository
+        public ActionResult UserLandingView()
         {
-            public NUser GetUserByNameAndPassword(string Username, string Password)
-            {
-                return new NUser()
-                {
-                    IsAdministrator = false
-                };
-            }
-
-            internal object GetUsers()
-            {
-                throw new NotImplementedException();
-            }
-        }
+            return View();
+        }       
     }
 }

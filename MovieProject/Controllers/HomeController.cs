@@ -1,5 +1,4 @@
-﻿using MovieProject.Helpers;
-using MovieProject.Models;
+﻿using MovieProject.Models;
 using MovieProjectDB;
 using MovieProjectDB.Entities;
 using System;
@@ -69,55 +68,39 @@ namespace MovieProject.Controllers
         public ActionResult Login()
         {
             return View();
-        }       
+        }        
         [HttpPost]
-        [ActionName("Login")]
-        public ActionResult Login(LoginFormModel viewModel)
+        public ActionResult Index(LoginFormModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                try
-                {
-                    //User user = UnitOfWork.UserRepository.Login(string Username, password)
-                   //User user = uow.UserRepository.Login(username, password)
-                    return View();
-                }
-                catch
-                {
-                    ModelState.AddModelError("", "Details are invalid!");
-                }
-                
-            }
-            return RedirectToAction("Index");           
-        }
-        
-        public ActionResult LoginPost(LoginFormModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {                               
-                NUserRepository userRepository = new NUserRepository();
-                RegistrationController.NUser dbUser = userRepository.GetUserByNameAndPassword(viewModel.Username, viewModel.Password);
+           User cbe = new User();
+            var s = cbe.User(model.UserName, model.Password);
+            
 
-                bool isUserExists = dbUser != null;
-                if (isUserExists)
-                {
-                    UserLoginProcess.Current.SetCurrentUser(dbUser.UserId, dbUser.Username, dbUser.IsAdministrator, dbUser.Password);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username and/or password");
-                }                
+            var item = s.FirstOrDefault();
+            if (item == "Success")
+            {
+
+                return View("UserLandingView");
             }
-            return View();
+            else if (item == "User Does not Exists")
+            {
+                ViewBag.NotValidUser = item;
+
+            }
+            else
+            {
+                ViewBag.Failedcount = item;
+            }
+
+            return View("Index");
         }
 
         public ActionResult Logout()
         {
-            UserLoginProcess.Current.Logout();
+            //LoginFormModel.Current.Logout();
+            Session.Abandon();
             return RedirectToAction("Index");
         }
-        //CRUD
-        
+       
     }
 }

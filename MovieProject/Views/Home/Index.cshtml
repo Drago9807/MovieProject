@@ -1,19 +1,19 @@
-﻿@using MovieProject.Helpers
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
-<h1>The best is here!</h1>
+<h1>The best information about movies is here!</h1>
 @*@if (UserLoginProcess.Current.IsAuthenticated)
-{
-    <div>Hello @UserLoginProcess.Current.Username </div>
-    <div>You are administrator: @UserLoginProcess.Current.IsAdministrator </div>
-    @Html.ActionLink("Logout", "Logout", "Home")
-}
-else
-{
-    @Html.ActionLink("Login", "Login", "Home")
-}*@
+    {
+        <div>Hello @UserLoginProcess.Current.Username </div>
+        <div>You are administrator: @UserLoginProcess.Current.IsAdministrator </div>
+        @Html.ActionLink("Logout", "Logout", "Home")
+    }
+    else
+    {
+        @Html.ActionLink("Login", "Login", "Home")
+    }*@
 
 @ViewBag.Message @**@
 
 @*@Html.ActionLink("Registration", "Registration", "Home")*@
+

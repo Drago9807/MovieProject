@@ -154,7 +154,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\UserLoginProcess.cs" />
     <Compile Include="Models\LoginFormModel.cs" />
     <Compile Include="Models\RegistrationFormModel.cs" />
     <Compile Include="Models\MovieModel.cs" />
@@ -199,7 +198,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
-    <Content Include="Views\Movie\Movies.cshtml" />
+    <Content Include="Views\Movie\Index.cshtml" />
     <Content Include="Views\Movie\Details.cshtml" />
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Movie\Edit.cshtml" />
